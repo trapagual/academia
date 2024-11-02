@@ -11,8 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -34,15 +34,27 @@ public class Usuario {
     
     @Enumerated(EnumType.STRING)
     private Rol rol;
-    
+ 
+    // la tabla alumnos es un pivote entre usuarios y cursos
     @ManyToMany
     @JoinTable(
-            name = "usuarios_cursos",
-            joinColumns = @JoinColumn(name="usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "cuso_id")
+        name = "alumnos",
+        joinColumns = @JoinColumn(name = "id_usuario"),
+        inverseJoinColumns = @JoinColumn(name = "id_curso")
     )
-    private Set<Curso> cursosMatriculados = new HashSet<>();
+    private List<Curso> cursos = new ArrayList<>();
 
+        // la tabla profesores es un pivote entre usuarios y asignaturas
+    @ManyToMany
+    @JoinTable(
+        name = "profesores",
+        joinColumns = @JoinColumn(name = "id_usuario"),
+        inverseJoinColumns = @JoinColumn(name = "id_asignatura")
+    )
+    private List<Asignatura> asignaturas = new ArrayList<>();
+  
+    
+    //constructores
     public Usuario() {
     }
 
@@ -52,6 +64,7 @@ public class Usuario {
         this.rol = rol;
     }
 
+    // getters/setters
     public Long getId() {
         return id;
     }
@@ -84,13 +97,22 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public Set<Curso> getCursosMatriculados() {
-        return cursosMatriculados;
+    public List<Curso> getCursos() {
+        return cursos;
     }
 
-    public void setCursosMatriculados(Set<Curso> cursosMatriculados) {
-        this.cursosMatriculados = cursosMatriculados;
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
-    
+
+    public List<Asignatura> getAsignaturas() {
+        return asignaturas;
+    }
+
+    public void setAsignaturas(List<Asignatura> asignaturas) {
+        this.asignaturas = asignaturas;
+    }
+
+   
     
 }

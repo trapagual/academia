@@ -31,6 +31,8 @@ public class Curso {
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Asignatura> asignaturas = new ArrayList<>();
 
+    
+    // constructores
     public Curso(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -39,6 +41,7 @@ public class Curso {
     public Curso() {
     }
 
+    // getters / setters
     public Long getId() {
         return id;
     }

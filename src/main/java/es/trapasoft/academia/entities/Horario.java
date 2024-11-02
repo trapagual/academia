@@ -25,9 +25,9 @@ public class Horario {
     private String horaFin;
     
     @ManyToOne
-    @JoinColumn(name = "asignatura_id")
     private Asignatura asignatura;
 
+    // constructores
     public Horario() {
     }
 

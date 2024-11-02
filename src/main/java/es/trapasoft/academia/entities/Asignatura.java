@@ -7,11 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -31,12 +28,11 @@ public class Asignatura {
     private String descripcion;
     
     @ManyToOne
-    @JoinColumn(name = "curso_id")
+    @JoinColumn(name = "id_curso")
     private Curso curso;
     
-    @ManyToMany(mappedBy = "asignaturasImpartidas")
-    private Set<Usuario> profesores = new HashSet<>();
-
+    
+    // constructores
     public Asignatura() {
     }
 
@@ -46,6 +42,7 @@ public class Asignatura {
         this.curso = curso;
     }
 
+    // getters /setters
     public Long getId() {
         return id;
     }
@@ -76,16 +73,7 @@ public class Asignatura {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
-    }
-
-    public Set<Usuario> getProfesores() {
-        return profesores;
-    }
-
-    public void setProfesores(Set<Usuario> profesores) {
-        this.profesores = profesores;
-    }
-    
+    }  
     
     
 }
